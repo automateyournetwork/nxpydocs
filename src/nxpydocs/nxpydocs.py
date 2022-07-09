@@ -49,59 +49,32 @@ class NxPyDocs():
 
     def nxpydocs(self):
         if self.command == "all":
+            self.clone()
             for single_command in self.supported_templates:
                 self.command = single_command
                 command_output = clid( '%s' % self.command )
                 parsed_json = json.loads(command_output)
-                if self.filetype != "none":
-                    if self.repo != "none":
-                        self.clone()
-                        self.pick_filetype(parsed_json)
-                        self.send_to_repo()
-                        self.cleanup()
-                        click.secho(json.dumps(parsed_json,indent=4, sort_keys=True), fg="green")
-                    else:
-                        self.pick_filetype(parsed_json)
-                        click.secho(json.dumps(parsed_json,indent=4, sort_keys=True), fg="green")                 
+                self.pick_filetype(parsed_json)
+            self.send_to_repo()
+            self.cleanup()
         else:
             if self.command in self.supported_templates:
                 command_output = clid( '%s' % self.command )
                 parsed_json = json.loads(command_output)
-                if self.filetype != "none":
-                    if self.repo != "none":
-                        self.clone()
-                        self.pick_filetype(parsed_json)
-                        self.send_to_repo()
-                        self.cleanup()
-                        click.secho(json.dumps(parsed_json,indent=4, sort_keys=True), fg="green")
-                    else: 
-                        self.pick_filetype(parsed_json)
-                        click.secho(json.dumps(parsed_json,indent=4, sort_keys=True), fg="green")
-                else:
-                    click.secho(json.dumps(parsed_json,indent=4, sort_keys=True), fg="green")
+                self.clone()
+                self.pick_filetype(parsed_json)
+                self.send_to_repo()
+                self.cleanup()
             else:
                 if self.filetype == "json" or "yaml":
                     command_output = clid( '%s' % self.command )
                     parsed_json = json.loads(command_output)                    
-                    if self.repo != "none":
-                        if self.filetype == "none":
-                            click.secho("If you select a repository you must select a filetype")
-                        else:
-                            self.clone()
-                            self.pick_filetype(parsed_json)
-                            self.send_to_repo()
-                            self.cleanup()
-                            click.secho(json.dumps(parsed_json,indent=4, sort_keys=True), fg="green")
-                    else: 
-                        command_output = clid( '%s' % self.command )
-                        parsed_json = json.loads(command_output)
-                        self.pick_filetype(parsed_json)
-                        click.secho(json.dumps(parsed_json,indent=4, sort_keys=True), fg="green")
+                    self.clone()
+                    self.pick_filetype(parsed_json)
+                    self.send_to_repo()
+                    self.cleanup()
                 else:
-                    command_output = clid( '%s' % self.command )
-                    parsed_json = json.loads(command_output)
                     click.secho("Show command not templated yet")
-                    click.secho(json.dumps(parsed_json,indent=4, sort_keys=True), fg="green")
 
     def pick_filetype(self, parsed_json):
         self.get_hostname()        
@@ -121,16 +94,21 @@ class NxPyDocs():
             self.all_files(parsed_json)
 
     def json_file(self, parsed_json):
+        os.chdir("JSON")
         with open('%s %s.json' % (self.hostname,self.command), 'w') as f:
             f.write(json.dumps(parsed_json,indent=4, sort_keys=True))
+        os.chdir("..")
 
     def yaml_file(self, parsed_json):
+        os.chdir("YAML")
         dirty_yaml = yaml.dump(json.loads(json.dumps(parsed_json,indent=4, sort_keys=True)), default_flow_style=False)
         clean_yaml = dirty_yaml.replace("!!python/unicode","")
         with open('%s %s.yaml' % (self.hostname,self.command), 'w') as f:
             f.write(clean_yaml)
+        os.chdir("..")
 
     def html_file(self, parsed_json):
+        os.chdir("HTML")
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)))
         html_template = env.get_template('html.j2')
@@ -138,8 +116,10 @@ class NxPyDocs():
             data_to_template=parsed_json)
         with open('%s %s.html' % (self.hostname,self.command), 'w') as f:
             f.write(html_output)
+        os.chdir("..")
 
     def markdown_file(self, parsed_json):
+        os.chdir("Markdown")
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)))
         markdown_template = env.get_template('md.j2')
@@ -147,26 +127,29 @@ class NxPyDocs():
             data_to_template=parsed_json)
         with open('%s %s.md' % (self.hostname,self.command), 'w') as f:
             f.write(markdown_output)
+        os.chdir("..")
 
     def csv_file(self, parsed_json):
+        os.chdir("CSV")
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)))
         csv_template = env.get_template('csv.j2')
         csv_output = csv_template.render(command = self.command,
-            data_to_template=parsed_json
-            )
+            data_to_template=parsed_json)
         with open('%s %s.csv' % (self.hostname,self.command), 'w') as f:
             f.write(csv_output)
+        os.chdir("..")
 
     def mindmap_file(self, parsed_json):
+        os.chdir("Mindmap")
         template_dir = Path(__file__).resolve().parent
         env = Environment(loader=FileSystemLoader(str(template_dir)))
         mindmap_template = env.get_template('mindmap.j2')
         mindmap_output = mindmap_template.render(command = self.command,
-            data_to_template=parsed_json
-            )
+            data_to_template=parsed_json)
         with open('%s %s mindmap.md' % (self.hostname,self.command), 'w') as f:
             f.write(mindmap_output)
+        os.chdir("..")
 
     def all_files(self, parsed_json):
         self.json_file(parsed_json)
@@ -205,8 +188,7 @@ class NxPyDocs():
     required=True)
 @click.option('--filetype',
     prompt='Filetype',
-    type=click.Choice(['none',
-                        'json',
+    type=click.Choice(['json',
                         'yaml',
                         'html',
                         'csv',
@@ -215,16 +197,15 @@ class NxPyDocs():
                         'all'],
         case_sensitive=True),
     help='Filetype to output captured network state to',
-    required=False,
-    default='none')
+    required=True)
 @click.option('--repo',
     prompt='Git Repository',
     help=('The Git repository to send the output files'),
-    required=False,envvar="REPO",default='none')
+    required=True,envvar="REPO")
 @click.option('--username',
     prompt='Git Repository Username',
     help=('The Git repository username'),
-    required=False,envvar="USERNAME",default='none')
+    required=True,envvar="USERNAME")
 @click.option('--token',
     prompt='Git Repository token',
     help=('The Git repository token'),
