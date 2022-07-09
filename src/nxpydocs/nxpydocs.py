@@ -31,7 +31,7 @@ class NxPyDocs():
                             # 'show interface',
                             # 'show interface status',
                             # 'show interface transceiver',
-                            # 'show inventory',
+                            'show inventory',
                             # 'show ip arp vrf all',
                             'show ip interface brief',
                             # 'show ip ospf',
@@ -59,9 +59,10 @@ class NxPyDocs():
                         self.pick_filetype(parsed_json)
                         self.send_to_repo()
                         self.cleanup()
+                        click.secho(json.dumps(parsed_json,indent=4, sort_keys=True), fg="green")
                     else:
                         self.pick_filetype(parsed_json)
-                click.secho(json.dumps(parsed_json,indent=4, sort_keys=True), fg="green")                        
+                        click.secho(json.dumps(parsed_json,indent=4, sort_keys=True), fg="green")                 
         else:
             if self.command in self.supported_templates:
                 command_output = clid( '%s' % self.command )
