@@ -31,6 +31,7 @@ domain <domain that matches NX-OS configured domain>
 ```console
 [cisco@guestshell ~]git config --global user.name "Your Name Here"
 [cisco@guestshell ~]git config --global user.email johndoe@example.com
+[cisco@guestshell ~]git config --global push.default simple
 ```
 
 ## Install the application
