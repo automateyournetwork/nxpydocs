@@ -1,0 +1,43 @@
+{%- if command == "show inventory" %}
+# Show Inventory
+{%-     for item in data_to_template.TABLE_inv.ROW_inv %}
+## Name: {{ item.name }}
+### Description: {{ item.desc }}
+### IDs
+#### Product: {{ item.productid }}
+#### Vendor: {{ item.vendorid }}
+### Serial Number: {{ serialnum }}
+{%-     endfor %}
+{%- else %}
+{%- if command == "show version" %}
+# Show Version
+## BIOS
+### BIOS Compile Time: {{ data_to_template.bios_cmpl_time }}
+### BIOS Version: {{ data_to_template.bios_ver_str }}
+## Bootflash Size: {{ data_to_template.bootflash_size }}
+## Chassis ID: {{ data_to_template.chassis_id }}
+## CPU Name: {{ data_to_template.cpu_name }}
+## Hostname: {{ data_to_template.host_name }}
+## Kernel Uptime: {{ data_to_template.kern_uptm_days }} {{ data_to_template.kern_uptm_hrs }} {{ data_to_template.kern_uptm_mins }} {{ data_to_template.kern_uptm_secs }}
+## Kickstart
+### Compile Time: {{ data_to_template.kick_cmpl_time }}
+### Filename: {{ data_to_template.kick_file_name }}
+### Timestamp: {{ data_to_template.kick_tmstmp }}
+### Version: {{ data_to_template.kickstart_ver_str }}
+## Manufacturer:  {{ data_to_template.manufacturer | replace(","," ") }}
+## Memory 
+### Type: {{ data_to_template.mem_type }} 
+### Total: {{ data_to_template.memory }}
+## NXOS
+### Compile Time: {{ data_to_template.nxos_cmpl_time }}
+### Filename: {{ data_to_template.nxos_file_name }}
+### Timestamp: {{ data_to_template.nxos_tmstmp }}
+### Version: {{ data_to_template.nxos_ver_str }}
+## Plugins: {{ data_to_template.plugins | replace(","," ") }}
+## Processor Board ID: {{ data_to_template.proc_board_id }}
+## RR
+### Reason: {{ data_to_template.rr_reason }}
+### Service: {{ data_to_template.rr_service }}
+### System Version: {{ data_to_template.rr_sys_ver }}
+## Header: {{ data_to_template.header_str | replace("\n"," ") | replace(","," ") }}
+{%- endif %}{%- endif %}

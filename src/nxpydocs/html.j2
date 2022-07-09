@@ -1,0 +1,88 @@
+{%- include 'datatable_header.j2' %}
+{%- if command == "show inventory" %}
+<h1>Show Inventory</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Product ID</th>
+    <th>Vendor ID</th>
+    <th>Serial Number</th>
+  </tr>
+</thead>
+<tbody>
+{%-     for item in data_to_template.TABLE_inv.ROW_inv %}
+    <tr>
+      <td>{{ item.name }}</td>
+      <td>{{ item.desc }}</td>
+      <td>{{ item.productid }}</td>
+      <td>{{ item.vendorid }}</td>
+      <td>{{ serialnum }}</td>
+    </tr>
+{%-     endfor %}
+</tbody>
+</table>
+{%- else %}
+{%- if command == "show version" %}
+<h1>Show Version</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>BIOS Compile Time</th>
+    <th>BIOS Version</th>
+    <th>Bootflash Size</th>
+    <th>Chassis ID</th>
+    <th>CPU Name</th>
+    <th>Hostname</th>
+    <th>Kernel Uptime</th>
+    <th>Kickstart Compile Time</th>
+    <th>Kickstart Filename</th>
+    <th>Kickstart Timestamp</th>
+    <th>Kickstart Version</th>
+    <th>Manufacturer</th>
+    <th>Memory Type</th>
+    <th>Memory</th>
+    <th>NXOS Compile Time</th>
+    <th>NXOS Filename</th>
+    <th>NXOS Timestamp</th>
+    <th>NXOS Version</th>
+    <th>Plugins</th>
+    <th>Processor Board ID</th>
+    <th>RR Reason</th>
+    <th>RR Service</th>
+    <th>RR System Version</th>
+    <th>Header</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>{{ data_to_template.bios_cmpl_time }}</td>
+    <td>{{ data_to_template.bios_ver_str }}</td>
+    <td>{{ data_to_template.bootflash_size }}</td>
+    <td>{{ data_to_template.chassis_id }}</td>
+    <td>{{ data_to_template.cpu_name }}</td>
+    <td>{{ data_to_template.host_name }}</td>
+    <td>{{ data_to_template.kern_uptm_days }} {{ data_to_template.kern_uptm_hrs }} {{ data_to_template.kern_uptm_mins }} {{ data_to_template.kern_uptm_secs }}</td>
+    <td>{{ data_to_template.kick_cmpl_time }}</td>
+    <td>{{ data_to_template.kick_file_name }}</td>
+    <td>{{ data_to_template.kick_tmstmp }}</td>
+    <td>{{ data_to_template.kickstart_ver_str }}</td>
+    <td>{{ data_to_template.manufacturer | replace(","," ") }}</td>
+    <td>{{ data_to_template.mem_type }}</td>
+    <td>{{ data_to_template.memory }}</td>
+    <td>{{ data_to_template.nxos_cmpl_time }}</td>
+    <td>{{ data_to_template.nxos_file_name }}</td>
+    <td>{{ data_to_template.nxos_tmstmp }}</td>
+    <td>{{ data_to_template.nxos_ver_str }}</td>
+    <td>{{ data_to_template.plugins | replace(","," ") }}</td>
+    <td>{{ data_to_template.proc_board_id }}</td>
+    <td>{{ data_to_template.rr_reason }}</td>
+    <td>{{ data_to_template.rr_service }}</td>
+    <td>{{ data_to_template.rr_sys_ver }}</td>
+    <td>{{ data_to_template.header_str | replace("\n"," ") | replace(","," ") }}</td>
+  </tr>
+</tbody>
+</table>
+{%- endif %}{%- endif %}
+{%- include 'datatable_footer.j2' %}

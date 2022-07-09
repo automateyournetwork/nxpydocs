@@ -1,0 +1,12 @@
+{%- if command == "show inventory" %}# Show Inventory
+| Name | Description | Product ID | Vendor ID | Serial Number |
+| ---- | ----------- | ---------- | --------- | ------------- |
+{%-     for item in data_to_template.TABLE_inv.ROW_inv %}
+| {{ item.name }} | {{ item.desc }} | {{ item.productid }} | {{ item.vendorid }} | {{ serialnum }} |
+{%-     endfor %}
+{%- else %}
+{%- if command == "show version" %}# Show Version
+| BIOS Compile Time | BIOS Version | Bootflash Size | Chassis ID | CPU Name | Hostname | Kernel Uptime | Kickstart Compile Time | Kickstart Filename | Kickstart Timestamp | Kickstart Version | Manufacturer | Memory Type | Memory | NXOS Compile Time | NXOS Filename | NXOS Timestamp | NXOS Version | Plugins | Processor Board ID | RR Reason | RR Service | RR System Version | Header |
+| ----------------- | ------------ | -------------- | ---------- | -------- | -------- | ------------- | ---------------------- | ------------------ | ------------------- | ----------------- | ------------ | ----------- | ------ | ----------------- | ------------- | -------------- | ------------ | ------- | ------------------ | --------- | ---------- | ----------------- | ------ |
+| {{ data_to_template.bios_cmpl_time }} | {{ data_to_template.bios_ver_str }} | {{ data_to_template.bootflash_size }} | {{ data_to_template.chassis_id }} | {{ data_to_template.cpu_name }} | {{ data_to_template.host_name }} | {{ data_to_template.kern_uptm_days }} {{ data_to_template.kern_uptm_hrs }} {{ data_to_template.kern_uptm_mins }} {{ data_to_template.kern_uptm_secs }} | {{ data_to_template.kick_cmpl_time }} | {{ data_to_template.kick_file_name }} | {{ data_to_template.kick_tmstmp }} | {{ data_to_template.kickstart_ver_str }} | {{ data_to_template.manufacturer | replace(","," ") }} | {{ data_to_template.mem_type }} | {{ data_to_template.memory }} | {{ data_to_template.nxos_cmpl_time }} | {{ data_to_template.nxos_file_name }} | {{ data_to_template.nxos_tmstmp }} | {{ data_to_template.nxos_ver_str }} | {{ data_to_template.plugins | replace(","," ") }} | {{ data_to_template.proc_board_id }} | {{ data_to_template.rr_reason }} | {{ data_to_template.rr_service }} | {{ data_to_template.rr_sys_ver }} | {{ data_to_template.header_str | replace("\n"," ") | replace(","," ") }} |
+{%- endif %}{%- endif %}
