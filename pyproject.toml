@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nxpydocs"
-version = "0.1.62"
+version = "0.1.88"
 description = "Automated Business Ready Documents from the NX-OS Guestshell"
 packages = [{ include = "nxpydocs", from = "src"}]
 readme = "README.md"

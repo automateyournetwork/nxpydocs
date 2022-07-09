@@ -1,3 +1,157 @@
+{%- if command == "show interface" %}
+# Show Interface
+{%-     for item in data_to_template.TABLE_interface.ROW_interface %}
+{%-         if item.eth_admin_fec_state is defined %}
+## Interface: {{ item.interface | default("N/A") }}
+### Administrative State: {{ item.admin_state | default("N/A") }}
+### Description: {{ item.desc | default("N/A") }}
+### Encapsulation: {{ item.encapsulation | default("N/A") }}
+### Ethernet
+#### Auto Negotiation: {{ item.eth_autoneg | default("N/A") }}
+#### Babbles: {{ item.eth_babbles | default("N/A") }}
+#### Bad
+##### Ethernet: {{ item.eth_bad_eth | default("N/A") }}
+##### Protocols: {{ item.eth_bad_proto | default("N/A") }}
+#### Beacon: {{ item.eth_beacon | default("N/A") }}
+#### Hardware
+##### BIA: {{ item.eth_bia_addr | default("N/A") }}
+##### MAC Address: {{ item.eth_hw_addr | default("N/A") }}
+##### Description: {{ item.eth_hw_desc | default("N/A") }}
+#### Bandwidth: {{ item.eth_bw | default("N/A") }}
+#### Clear Counters: {{ item.eth_clear_counters | default("N/A") }}
+#### Collisions: {{ item.eth_coll | default("N/A") }}
+#### CRC: {{ item.eth_crc | default("N/A") }}
+#### Deferred: {{ item.eth_deferred | default("N/A") }}
+#### Delay: {{ item.eth_dly | default("N/A") }}
+#### Dribble: {{ item.eth_dribble | default("N/A") }}
+#### Duplex: {{ item.eth_duplex | default("N/A") }}
+#### EEE State: {{ item.eth_eee_state | default("N/A") }}
+#### Ethertype: {{ item.eth_ethertype | default("N/A") }}
+#### Frame: {{ item.eth_frame | default("N/A") }}
+#### Giants: {{ item.eth_giants | default("N/A") }}
+#### Ignored: {{ item.eth_ignored | default("N/A") }}
+#### Input
+##### Flow Control: {{ item.eth_in_flowctrl | default("N/A") }}
+##### IF Down Drops: {{ item.eth_in_ifdown_drops | default("N/A") }}
+##### Broadcast: {{ item.eth_inbcast | default("N/A") }}
+##### Bytes: {{ item.eth_inbytes | default("N/A") }}
+##### Discards: {{ item.eth_indiscard | default("N/A") }}
+##### Errors: {{ item.eth_inerr | default("N/A") }}
+##### Multicast: {{ item.eth_inmcast | default("N/A") }}
+##### Pause: {{ item.eth_inpause | default("N/A") }}
+##### Packets: {{ item.eth_inpkts | default("N/A") }}
+##### Rates
+###### 1 Bits: {{ item.eth_inrate1_bits | default("N/A") }}
+###### 1 Packets: {{ item.eth_inrate1_pkts | default("N/A") }}
+###### 1 Summary Bits: {{ item.eth_inrate1_summary_bits | default("N/A") }}
+###### 1 Summary Packets: {{ item.eth_inrate1_summary_pkts | default("N/A") }}
+###### 2 Bits: {{ item.eth_inrate2_bits | default("N/A") }}
+###### 2 Packets: {{ item.eth_inrate2_pkts | default("N/A") }}
+###### 2 Summary Bits: {{ item.eth_inrate2_summary_bits | default("N/A") }}
+###### 2 Summary Packets: {{ item.eth_inrate2_summary_pkts | default("N/A") }}
+##### Unicast: {{ item.eth_inucast | default("N/A") }}
+#### IP
+##### Address: {{ item.eth_ip_addr | default("N/A") }}
+##### Mask: {{ item.eth_ip_mask | default("N/A") }}
+##### Prefix: {{ item.eth_ip_prefix | default("N/A") }}
+#### Jumbo
+##### Input Packets: {{ item.eth_jumbo_inpkts | default("N/A") }}
+##### Output Packets: {{ item.eth_jumbo_outpkts | default("N/A") }}
+#### Late Collisions: {{ item.eth_latecoll | default("N/A") }}
+#### Link Flapped: {{ item.eth_link_flapped | default("N/A") }}
+#### Load Interval
+##### 1 
+###### RX: {{ item.eth_load_interval1_rx | default("N/A") }}
+###### TX: {{ item.eth_load_interval1_tx | default("N/A") }}
+##### 2
+###### RX: {{ item.eth_load_interval2_rx | default("N/A") }}
+###### TX: {{ item.eth_load_interval2_tx | default("N/A") }}
+#### Lost Carrier: {{ item.eth_lostcarrier | default("N/A") }}
+#### MDIX: {{ item.eth_mdix | default("N/A") }}
+#### MTU: {{ item.eth_mtu | default("N/A") }}
+#### No Buffer: {{ item.eth_nobuf | default("N/A") }}
+#### No Carrier: {{ item.eth_nocarrier | default("N/A") }}
+#### FEC
+##### Admin State: {{ item.eth_admin_fec_state | default("N/A") }}
+##### State: {{ item.eth_oper_fec_state | default("N/A") }}
+#### Output
+##### Flow Control:  {{ item.eth_out_flowctrl | default("N/A") }}
+##### Broadcast: {{ item.eth_outbcast | default("N/A") }}
+##### Bytes: {{ item.eth_outbytes | default("N/A") }}
+##### Discards: {{ item.eth_outdiscard | default("N/A") }}
+##### Errors: {{ item.eth_outerr | default("N/A") }}
+##### Multicast: {{ item.eth_outmcast | default("N/A") }}
+##### Pause: {{ item.eth_outpause | default("N/A") }}
+##### Packets: {{ item.eth_outpkts | default("N/A") }}
+##### Rate
+###### 1 Bits: {{ item.eth_outrate1_bits | default("N/A") }}
+###### 1 Packets: {{ item.eth_outrate1_pkts | default("N/A") }}
+###### 1 Summary Bits: {{ item.eth_outrate1_summary_bits | default("N/A") }}
+###### 1 Summary Packets: {{ item.eth_outrate1_summary_pkts | default("N/A") }}
+###### 2 Bits: {{ item.eth_outrate2_bits | default("N/A") }}
+###### 2 Packets: {{ item.eth_outrate2_pkts | default("N/A") }}
+###### 2 Summary Bits:  {{ item.eth_outrate2_summary_bits | default("N/A") }}
+###### 2 Summary Packets: {{ item.eth_outrate2_summary_pkts | default("N/A") }}
+##### Unicast: {{ item.eth_outucast | default("N/A") }}
+#### Overruns: {{ item.eth_overrun | default("N/A") }}
+#### Reliability: {{ item.eth_reliability | default("N/A") }}
+#### Reset Counters: {{ item.eth_reset_cntr | default("N/A") }}
+#### Runts: {{ item.eth_runts | default("N/A") }}
+#### Load
+##### RX: {{ item.eth_rxload | default("N/A") }}
+##### TX: {{ item.eth_txload | default("N/A") }}
+#### Speed: {{ item.eth_speed | default("N/A") }}
+#### Storm Supp: {{ item.eth_storm_supp | default("N/A") }}
+#### SWT Monitor: {{ item.eth_swt_monitor | default("N/A") }}
+#### Underruns: {{ item.eth_underrun | default("N/A") }}
+#### Watchdog: {{ item.eth_watchdog | default("N/A") }}
+### Medium: {{ item.medium | default("N/A") }}
+### Share State: {{ item.share_state | default("N/A") }}
+### State: {{ item.state | default("N/A") }}
+{%-         endif %}
+{%-         if loop_in_bytes is defined %}
+### Loopback
+#### Input
+##### Bytes: {{ item.loop_in_bytes | default("N/A") }}
+##### Compressed: {{ item.loop_in_compressed | default("N/A") }}
+##### Errors: {{ item.loop_in_errors | default("N/A") }}
+##### FIFO: {{ item.loop_in_fifo | default("N/A") }}
+##### Frames: {{ item.loop_in_frame | default("N/A") }}
+##### Multicast: {{ item.loop_in_mcast | default("N/A") }}
+##### Overruns: {{ item.loop_in_overrun | default("N/A") }}
+##### Packets: {{ item.loop_in_pkts | default("N/A") }}
+#### Output
+##### Bytes: {{ item.loop_out_bytes | default("N/A") }}
+##### Carriers: {{ item.loop_out_carriers | default("N/A") }}
+##### Collisions: {{ item.loop_out_collisions | default("N/A") }}
+##### Errors: {{ item.loop_out_errors | default("N/A") }}
+##### FIFO: {{ item.loop_out_fifo | default("N/A") }}
+##### Packets: {{ item.loop_out_pkts | default("N/A") }}
+##### Underruns: {{ item.loop_out_underruns | default("N/A") }}
+{%-         endif %}
+{%-         if item.vdc_lvl_in_avg_bits is defined %}
+### Management
+#### Input
+##### Average
+###### Bits: {{ item.vdc_lvl_in_avg_bits | default("N/A") }}
+###### Packets: {{ item.vdc_lvl_in_avg_pkts | default("N/A") }}
+##### Broadcast: {{ item.vdc_lvl_in_bcast | default("N/A") }}
+##### Bytes: {{ item.vdc_lvl_in_bytes | default("N/A") }}
+##### Multicast: {{ item.vdc_lvl_in_mcast | default("N/A") }}
+##### Packets: {{ item.vdc_lvl_in_pkts | default("N/A") }}
+##### Unicast: {{ item.vdc_lvl_in_ucast | default("N/A") }}
+#### Output
+##### Average
+###### Bits: {{ item.vdc_lvl_out_avg_bits | default("N/A") }}
+###### Packets: {{ item.vdc_lvl_out_avg_pkts | default("N/A") }}
+#### Broadcast: {{ item.vdc_lvl_out_bcast | default("N/A") }}
+#### Bytes: {{ item.vdc_lvl_out_bytes | default("N/A") }}
+#### Multicast: {{ item.vdc_lvl_out_mcast | default("N/A") }}
+#### Packets: {{ item.vdc_lvl_out_pkts | default("N/A") }}
+#### Unicast: {{ item.vdc_lvl_out_ucast | default("N/A") }}
+{%-         endif %}
+{%-     endfor %}
+{%- else %}
 {%- if command == "show inventory" %}
 # Show Inventory
 {%-     for item in data_to_template.TABLE_inv.ROW_inv %}
@@ -7,6 +161,20 @@
 #### Product: {{ item.productid }}
 #### Vendor: {{ item.vendorid }}
 ### Serial Number: {{ serialnum }}
+{%-     endfor %}
+{%- else %}
+{%- if command == "show ip interface brief"%}
+# Show IP Interface Brief
+{%-     for item in data_to_template.TABLE_intf.ROW_intf %}
+## Name: {{ item["intf-name"] }}
+### State
+#### Administrative: {{ item["admin-state"] }}
+#### Link: {{ item["link-state"] }}
+#### Protocol: {{ item["proto-state"] }}
+### IOD: {{ item["iod"] }}
+### IP Disabled: {{ item["ip-disabled"] }}
+### Prefix: {{ item["prefix"] }}
+### VRF Name Out: {{ item["vrf-name-out"] }}
 {%-     endfor %}
 {%- else %}
 {%- if command == "show version" %}
@@ -40,4 +208,4 @@
 ### Service: {{ data_to_template.rr_service }}
 ### System Version: {{ data_to_template.rr_sys_ver }}
 ## Header: {{ data_to_template.header_str | replace("\n"," ") | replace(","," ") }}
-{%- endif %}{%- endif %}
+{%- endif %}{%- endif %}{%- endif %}{%- endif %}

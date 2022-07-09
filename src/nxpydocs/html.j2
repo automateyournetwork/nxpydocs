@@ -1,4 +1,329 @@
 {%- include 'datatable_header.j2' %}
+{%- if command == "show interface"%}
+<h1>Show Interface</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>Admin State</th>
+    <th>Description</th>
+    <th>Encapsulation</th>
+    <th>Ethernet Admin FEC State</th>
+    <th>Ethernet Auto Negotiate</th>
+    <th>Ethernet Babbles</th>
+    <th>Ethernet Bad Ethernet</th>
+    <th>Ethernet Bad Protocol</th>
+    <th>Ethernet Beacon</th>
+    <th>Ethernet BIA Address</th>
+    <th>Ethernet Bandwidth</th>
+    <th>Ethernet Clear Counters</th>
+    <th>Ethernet Collisions</th>
+    <th>Ethernet CRC</th>
+    <th>Ethernet Deferred</th>
+    <th>Ethernet Delay</th>
+    <th>Ethernet Dribble</th>
+    <th>Ethernet Duplex</th>
+    <th>Ethernet EEE State</th>
+    <th>Ethernet Ethertype</th>
+    <th>Ethernet Frame</th>
+    <th>Ethernet Giants</th>
+    <th>Ethernet MAC Address</th>
+    <th>Ethernet Hardware Description</th>
+    <th>Ethernet Ignored</th>
+    <th>Ethernet Input Flow Control</th>
+    <th>Ethernet Input Interface Down Drops</th>
+    <th>Ethernet Input Broadcast</th>
+    <th>Ethernet Input Bytes</th>
+    <th>Ethernet Input Discard</th>
+    <th>Ethernet Input Error</th>
+    <th>Ethernet Input Multicast</th>
+    <th>Ethernet Input Pause</th>
+    <th>Ethernet Input Packets</th>
+    <th>Ethernet Input Rate 1 Bits</th>
+    <th>Ethernet Input Rate 1 Packets</th>
+    <th>Ethernet Input Rate 1 Summary Bits</th>
+    <th>Ethernet Input Rate 1 Summary Packets</th>
+    <th>Ethernet Input Rate 2 Bits</th>
+    <th>Ethernet Input Rate 2 Packets</th>
+    <th>Ethernet Input Rate 2 Summary Bits</th>
+    <th>Ethernet Input Rate 2 Summary Packets</th>
+    <th>Ethernet Input Unicast</th>
+    <th>Ethernet IP Address</th>
+    <th>Ethernet IP Mask</th>
+    <th>Ethernet IP Prefix</th>
+    <th>Ethernet Jumbo Input Packets</th>
+    <th>Ethernet Jumbo Outpkts</th>
+    <th>Ethernet Late Collision</th>
+    <th>Ethernet Link Flapped</th>
+    <th>Ethernet Load Interval 1 RX</th>
+    <th>Ethernet Load Interval 1 TX</th>
+    <th>Ethernet Load Interval 2_RX</th>
+    <th>Ethernet Load Interval 2 TX</th>
+    <th>Ethernet Lost Carrier</th>
+    <th>Ethernet MDIX</th>
+    <th>Ethernet MTU</th>
+    <th>Ethernet No Buffer</th>
+    <th>Ethernet No Carrier</th>
+    <th>Ethernet Opereration FEC State</th>
+    <th>Ethernet Output Flow Control</th>
+    <th>Ethernet Output Broadcast</th>
+    <th>Ethernet Output Bytes</th>
+    <th>Ethernet Output Discard</th>
+    <th>Ethernet Output Error</th>
+    <th>Ethernet Output Multicast</th>
+    <th>Ethernet Output Pause</th>
+    <th>Ethernet Output Packets</th>
+    <th>Ethernet Output Rate 1 Bits</th>
+    <th>Ethernet Output Rate 1 Packets</th>
+    <th>Ethernet Output Rate 1 Summary Bits</th>
+    <th>Ethernet Output Rate 1 Summary Packets</th>
+    <th>Ethernet Output Rate 2 Bits</th>
+    <th>Ethernet Output Rate 2 Packets</th>
+    <th>Ethernet Output Rate 2 Summary Bits</th>
+    <th>Ethernet Output Rate 2 Summary Packets</th>
+    <th>Ethernet Output Unicast</th>
+    <th>Ethernet Overrun</th>
+    <th>Ethernet Reliability</th>
+    <th>Ethernet Reset Control</th>
+    <th>Ethernet Runts</th>
+    <th>Ethernet RX Load</th>
+    <th>Ethernet TX Load</th>
+    <th>Ethernet Speed</th>
+    <th>Ethernet Storm Support</th>
+    <th>Ethernet SWT Monitor</th>
+    <th>Ethernet Underrun</th>
+    <th>Ethernet Watchdog</th>
+    <th>Interface</th>
+    <th>Medium</th>
+    <th>Share State</th>
+    <th>State</th>
+    <th>Loopback Input Bytes</th>
+    <th>Loopback Input Compressed</th>
+    <th>Loopback Input Errors</th>
+    <th>Loopback Input FIFO</th>
+    <th>Loopback Input Frame</th>
+    <th>Loopback Input Multicast</th>
+    <th>Loopback Input Overrun</th>
+    <th>Loopback Input Packets</th>
+    <th>Loopback Output Bytes</th>
+    <th>Loopback Output Carriers</th>
+    <th>Loopback Output Collisions</th>
+    <th>Loopback Output Errors</th>
+    <th>Loopback Output FIFO</th>
+    <th>Loopback Output Packets</th>
+    <th>Loopback Output Underruns</th>
+    <th>VDC Level Input Average Bits</th>
+    <th>VDC Level Input Average Packets</th>
+    <th>VDC Level Input Broadcast</th>
+    <th>VDC Level Input Bytes</th>
+    <th>VDC Level Input Multicast</th>
+    <th>VDC Level Input Packets</th>
+    <th>VDC Level Input Unicast</th>
+    <th>VDC Level Output Average Bits</th>
+    <th>VDC Level Output Average Packets</th>
+    <th>VDC Level Output Broadcast</th>
+    <th>VDC Level Output Bytes</th>
+    <th>VDC Level Output Multicast</th>
+    <th>VDC Level Output Packets</th>
+    <th>VDC Level Output Unicast</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for item in data_to_template.TABLE_interface.ROW_interface %}
+  <tr>
+{%-        if item.admin_state != "up" %}    
+    <td style="background-color:#FF0000">{{ item.admin_state | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.admin_state | default("N/A") }}</td>
+{%-        endif %}
+    <td>{{ item.desc | default("N/A") }}</td>
+    <td>{{ item.encapsulation | default("N/A") }}</td>
+    <td>{{ item.eth_admin_fec_state | default("N/A") }}</td>
+    <td>{{ item.eth_autoneg | default("N/A") }}</td>
+{%-        if item.eth_babbles is defined and item.eth_babbles == 0 %}    
+    <td style="background-color:#FF0000">{{ item.eth_babbles | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.eth_babbles | default("N/A") }}</td>
+{%-        endif %}
+{%-        if item.eth_bad_eth is defined and item.eth_bad_eth == 0 %}    
+    <td style="background-color:#FF0000">{{ item.eth_bad_eth | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.eth_bad_eth | default("N/A") }}</td>
+{%-        endif %}
+{%-        if item.eth_bad_proto is defined and item.eth_bad_proto == 0 %}    
+    <td style="background-color:#FF0000">{{ item.eth_bad_proto | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.eth_bad_proto | default("N/A") }}</td>
+{%-        endif %}
+    <td>{{ item.eth_beacon | default("N/A") }}</td>
+    <td>{{ item.eth_bia_addr | default("N/A") }}</td>
+    <td>{{ item.eth_bw | default("N/A") }}</td>
+    <td>{{ item.eth_clear_counters | default("N/A") }}</td>
+{%-        if item.eth_coll is defined and item.eth_coll == 0 %}    
+    <td style="background-color:#FF0000">{{ item.eth_coll | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.eth_coll | default("N/A") }}</td>
+{%-        endif %}
+{%-        if item.eth_crc is defined and item.eth_crc == 0 %}    
+    <td style="background-color:#FF0000">{{ item.eth_crc | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.eth_crc | default("N/A") }}</td>
+{%-        endif %}
+    <td>{{ item.eth_deferred | default("N/A") }}</td>
+    <td>{{ item.eth_dly | default("N/A") }}</td>
+    <td>{{ item.eth_dribble | default("N/A") }}</td>
+{%-        if item.eth_duplex is defined and item.eth_duplex == "half" %}    
+    <td style="background-color:#FF0000">{{ item.eth_duplex | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.eth_duplex | default("N/A") }}</td>
+{%-        endif %}    
+    <td>{{ item.eth_eee_state | default("N/A") }}</td>
+    <td>{{ item.eth_ethertype | default("N/A") }}</td>
+    <td>{{ item.eth_frame | default("N/A") }}</td>
+    <td>{{ item.eth_giants | default("N/A") }}</td>
+    <td>{{ item.eth_hw_addr | default("N/A") }}</td>
+    <td>{{ item.eth_hw_desc | default("N/A") }}</td>
+    <td>{{ item.eth_ignored | default("N/A") }}</td>
+    <td>{{ item.eth_in_flowctrl | default("N/A") }}</td>
+{%-        if item.eth_in_ifdown_drops is defined and item.eth_in_ifdown_drops == 0 %}    
+    <td style="background-color:#FF0000">{{ item.eth_in_ifdown_drops | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.eth_in_ifdown_drops | default("N/A") }}</td>
+{%-        endif %}    
+    <td>{{ item.eth_inbcast | default("N/A") }}</td>
+    <td>{{ item.eth_inbytes | default("N/A") }}</td>
+{%-        if item.eth_indiscard is defined and item.eth_indiscard == 0 %}    
+    <td style="background-color:#FF0000">{{ item.eth_indiscard | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.eth_indiscard | default("N/A") }}</td>
+{%-        endif %}     
+    <td>{{ item.eth_inerr | default("N/A") }}</td>
+    <td>{{ item.eth_inmcast | default("N/A") }}</td>
+    <td>{{ item.eth_inpause | default("N/A") }}</td>
+    <td>{{ item.eth_inpkts | default("N/A") }}</td>
+    <td>{{ item.eth_inrate1_bits | default("N/A") }}</td>
+    <td>{{ item.eth_inrate1_pkts | default("N/A") }}</td>
+    <td>{{ item.eth_inrate1_summary_bits | default("N/A") }}</td>
+    <td>{{ item.eth_inrate1_summary_pkts | default("N/A") }}</td>
+    <td>{{ item.eth_inrate2_bits | default("N/A") }}</td>
+    <td>{{ item.eth_inrate2_pkts | default("N/A") }}</td>
+    <td>{{ item.eth_inrate2_summary_bits | default("N/A") }}</td>
+    <td>{{ item.eth_inrate2_summary_pkts | default("N/A") }}</td>
+    <td>{{ item.eth_inucast | default("N/A") }}</td>
+    <td>{{ item.eth_ip_addr | default("N/A") }}</td>
+    <td>{{ item.eth_ip_mask | default("N/A") }}</td>
+    <td>{{ item.eth_ip_prefix | default("N/A") }}</td>
+    <td>{{ item.eth_jumbo_inpkts | default("N/A") }}</td>
+    <td>{{ item.eth_jumbo_outpkts | default("N/A") }}</td>
+{%-        if item.eth_latecoll is defined and item.eth_latecoll == 0 %}    
+    <td style="background-color:#FF0000">{{ item.eth_latecoll | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.eth_latecoll | default("N/A") }}</td>
+{%-        endif %}
+{%-        if item.eth_link_flapped is defined and item.eth_link_flapped != "never" %}    
+    <td style="background-color:#FF0000">{{ item.eth_link_flapped | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.eth_link_flapped | default("N/A") }}</td>
+{%-        endif %}
+    <td>{{ item.eth_load_interval1_rx | default("N/A") }}</td>
+    <td>{{ item.eth_load_interval1_tx | default("N/A") }}</td>
+    <td>{{ item.eth_load_interval2_rx | default("N/A") }}</td>
+    <td>{{ item.eth_load_interval2_tx | default("N/A") }}</td>
+{%-        if item.eth_lostcarrier is defined and item.eth_lostcarrier == 0 %}    
+    <td style="background-color:#FF0000">{{ item.eth_lostcarrier | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.eth_lostcarrier | default("N/A") }}</td>
+{%-        endif %}    
+    <td>{{ item.eth_mdix | default("N/A") }}</td>
+    <td>{{ item.eth_mtu | default("N/A") }}</td>
+    <td>{{ item.eth_nobuf | default("N/A") }}</td>
+    <td>{{ item.eth_nocarrier | default("N/A") }}</td>
+    <td>{{ item.eth_oper_fec_state | default("N/A") }}</td>
+    <td>{{ item.eth_out_flowctrl | default("N/A") }}</td>
+    <td>{{ item.eth_outbcast | default("N/A") }}</td>
+    <td>{{ item.eth_outbytes | default("N/A") }}</td>
+{%-        if item.eth_outdiscard is defined and item.eth_outdiscard == 0 %}    
+    <td style="background-color:#FF0000">{{ item.eth_outdiscard | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.eth_outdiscard | default("N/A") }}</td>
+{%-        endif %}      
+    <td>{{ item.eth_outerr | default("N/A") }}</td>
+    <td>{{ item.eth_outmcast | default("N/A") }}</td>
+    <td>{{ item.eth_outpause | default("N/A") }}</td>
+    <td>{{ item.eth_outpkts | default("N/A") }}</td>
+    <td>{{ item.eth_outrate1_bits | default("N/A") }}</td>
+    <td>{{ item.eth_outrate1_pkts | default("N/A") }}</td>
+    <td>{{ item.eth_outrate1_summary_bits | default("N/A") }}</td>
+    <td>{{ item.eth_outrate1_summary_pkts | default("N/A") }}</td>
+    <td>{{ item.eth_outrate2_bits | default("N/A") }}</td>
+    <td>{{ item.eth_outrate2_pkts | default("N/A") }}</td>
+    <td>{{ item.eth_outrate2_summary_bits | default("N/A") }}</td>
+    <td>{{ item.eth_outrate2_summary_pkts | default("N/A") }}</td>
+    <td>{{ item.eth_outucast | default("N/A") }}</td>
+{%-        if item.eth_overrun is defined and item.eth_overrun == 0 %}    
+    <td style="background-color:#FF0000">{{ item.eth_overrun | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.eth_overrun | default("N/A") }}</td>
+{%-        endif %}      
+    <td>{{ item.eth_reliability | default("N/A") }}</td>
+    <td>{{ item.eth_reset_cntr | default("N/A") }}</td>
+    <td>{{ item.eth_runts | default("N/A") }}</td>
+    <td>{{ item.eth_rxload | default("N/A") }}</td>
+    <td>{{ item.eth_txload | default("N/A") }}</td>
+    <td>{{ item.eth_speed | default("N/A") }}</td>
+    <td>{{ item.eth_storm_supp | default("N/A") }}</td>
+    <td>{{ item.eth_swt_monitor | default("N/A") }}</td>
+    <td>{{ item.eth_underrun | default("N/A") }}</td>
+    <td>{{ item.eth_watchdog | default("N/A") }}</td>
+    <td>{{ item.interface | default("N/A") }}</td>
+    <td>{{ item.medium | default("N/A") }}</td>
+    <td>{{ item.share_state | default("N/A") }}</td>
+    <td>{{ item.state | default("N/A") }}</td>
+    <td>{{ item.loop_in_bytes | default("N/A") }}</td>
+    <td>{{ item.loop_in_compressed | default("N/A") }}</td>
+{%-        if item.loop_in_errors is defined and item.loop_in_errors == 0 %}    
+    <td style="background-color:#FF0000">{{ item.loop_in_errors | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.loop_in_errors | default("N/A") }}</td>
+{%-        endif %}
+    <td>{{ item.loop_in_fifo | default("N/A") }}</td>
+    <td>{{ item.loop_in_frame | default("N/A") }}</td>
+    <td>{{ item.loop_in_mcast | default("N/A") }}</td>
+    <td>{{ item.loop_in_overrun | default("N/A") }}</td>
+    <td>{{ item.loop_in_pkts | default("N/A") }}</td>
+    <td>{{ item.loop_out_bytes | default("N/A") }}</td>
+    <td>{{ item.loop_out_carriers | default("N/A") }}</td>
+{%-        if item.loop_out_collisions is defined and item.loop_out_collisions == 0 %}    
+    <td style="background-color:#FF0000">{{ item.loop_out_collisions | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.loop_out_collisions | default("N/A") }}</td>
+{%-        endif %}
+{%-        if item.loop_out_errors is defined and item.loop_out_errors == 0 %}    
+    <td style="background-color:#FF0000">{{ item.loop_out_errors | default("N/A") }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item.loop_out_errors | default("N/A") }}</td>
+{%-        endif %}    
+    <td>{{ item.loop_out_fifo | default("N/A") }}</td>
+    <td>{{ item.loop_out_pkts | default("N/A") }}</td>
+    <td>{{ item.loop_out_underruns | default("N/A") }}</td>
+    <td>{{ item.vdc_lvl_in_avg_bits | default("N/A") }}</td>
+    <td>{{ item.vdc_lvl_in_avg_pkts | default("N/A") }}</td>
+    <td>{{ item.vdc_lvl_in_bcast | default("N/A") }}</td>
+    <td>{{ item.vdc_lvl_in_bytes | default("N/A") }}</td>
+    <td>{{ item.vdc_lvl_in_mcast | default("N/A") }}</td>
+    <td>{{ item.vdc_lvl_in_pkts | default("N/A") }}</td>
+    <td>{{ item.vdc_lvl_in_ucast | default("N/A") }}</td>
+    <td>{{ item.vdc_lvl_out_avg_bits | default("N/A") }}</td>
+    <td>{{ item.vdc_lvl_out_avg_pkts | default("N/A") }}</td>
+    <td>{{ item.vdc_lvl_out_bcast | default("N/A") }}</td>
+    <td>{{ item.vdc_lvl_out_bytes | default("N/A") }}</td>
+    <td>{{ item.vdc_lvl_out_mcast | default("N/A") }}</td>
+    <td>{{ item.vdc_lvl_out_pkts | default("N/A") }}</td>
+    <td>{{ item.vdc_lvl_out_ucast | default("N/A") }}</td>
+  </tr>
+{%-     endfor %}
+</tbody>
+</table>
+{%- else %}
 {%- if command == "show inventory" %}
 <h1>Show Inventory</h1>
 <table id = "datatable">
@@ -20,6 +345,49 @@
       <td>{{ item.vendorid }}</td>
       <td>{{ serialnum }}</td>
     </tr>
+{%-     endfor %}
+</tbody>
+</table>
+{%- else %}
+{%- if command == "show ip interface brief" %}
+<h1>Show IP Interface Brief</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>Interface Name</th>
+    <th>Administrative State</th>
+    <th>Link State</th>
+    <th>Protocol State</th>
+    <th>IOD</th>
+    <th>IP Disabled</th>
+    <th>Prefix</th>
+    <th>VRF Name Out</th>
+  </tr>
+</thead>
+<tbody>  
+{%-     for item in data_to_template.TABLE_intf.ROW_intf %}
+  <tr>
+    <td>{{ item["intf-name"] }}</td>
+{%-        if item['admin-state'] == "down" %}
+    <td style="background-color:#FF0000">{{ item["admin-state"] }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item["admin-state"] }}</td>
+{%-        endif %}
+{%-        if item['link-state'] == "down" %}
+    <td style="background-color:#FF0000">{{ item["link-state"] }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item["link-state"] }}</td>
+{%-        endif %}
+{%-        if item['proto-state'] == "down" %}
+    <td style="background-color:#FF0000">{{ item["proto-state"] }}</td>
+{%-        else %}
+    <td style="background-color:#00FF00">{{ item["proto-state"] }}</td>
+{%-        endif %}
+    <td>{{ item["iod"] }}</td>
+    <td>{{ item["ip-disabled"] }}</td>
+    <td>{{ item["prefix"] }}</td>
+    <td>{{ item["vrf-name-out"] }}</td>
+  </tr>
 {%-     endfor %}
 </tbody>
 </table>
@@ -84,5 +452,5 @@
   </tr>
 </tbody>
 </table>
-{%- endif %}{%- endif %}
+{%- endif %}{%- endif %}{%- endif %}{%- endif %}
 {%- include 'datatable_footer.j2' %}
