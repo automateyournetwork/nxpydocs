@@ -126,7 +126,7 @@ class NxPyDocs():
     def yaml_file(self, parsed_json):
         dirty_yaml = yaml.dump(json.loads(json.dumps(parsed_json,indent=4, sort_keys=True)), default_flow_style=False)
         clean_yaml = dirty_yaml.replace("!!python/unicode","")
-        with open('%s.yaml' % self.command, 'w') as f:
+        with open('%s %s.yaml' % (self.hostname,self.command), 'w') as f:
             f.write(clean_yaml)
 
     def html_file(self, parsed_json):
@@ -135,7 +135,7 @@ class NxPyDocs():
         html_template = env.get_template('html.j2')
         html_output = html_template.render(command = self.command,
             data_to_template=parsed_json)
-        with open('%s.html' % self.command, 'w') as f:
+        with open('%s %s.html' % (self.hostname,self.command), 'w') as f:
             f.write(html_output)
 
     def markdown_file(self, parsed_json):
@@ -144,7 +144,7 @@ class NxPyDocs():
         markdown_template = env.get_template('md.j2')
         markdown_output = markdown_template.render(command = self.command,
             data_to_template=parsed_json)
-        with open('%s.md' % self.command, 'w') as f:
+        with open('%s %s.md' % (self.hostname,self.command), 'w') as f:
             f.write(markdown_output)
 
     def csv_file(self, parsed_json):
@@ -154,7 +154,7 @@ class NxPyDocs():
         csv_output = csv_template.render(command = self.command,
             data_to_template=parsed_json
             )
-        with open('%s.csv' % self.command, 'w') as f:
+        with open('%s %s.csv' % (self.hostname,self.command), 'w') as f:
             f.write(csv_output)
 
     def mindmap_file(self, parsed_json):
@@ -164,7 +164,7 @@ class NxPyDocs():
         mindmap_output = mindmap_template.render(command = self.command,
             data_to_template=parsed_json
             )
-        with open('%s mindmap.md' % self.command, 'w') as f:
+        with open('%s %s mindmap.md' % (self.hostname,self.command), 'w') as f:
             f.write(mindmap_output)
 
     def all_files(self, parsed_json):
