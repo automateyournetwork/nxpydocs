@@ -28,7 +28,7 @@ class NxPyDocs():
                             # 'show cdp neighbors',
                             # 'show cdp neighbors detail',
                             # 'show environment',
-                            # 'show interface',
+                            'show interface',
                             # 'show interface status',
                             # 'show interface transceiver',
                             'show inventory',
@@ -209,7 +209,7 @@ class NxPyDocs():
 @click.option('--token',
     prompt='Git Repository token',
     help=('The Git repository token'),
-    required=False,hide_input=True,envvar="TOKEN",default='none')
+    required=True,hide_input=True,envvar="TOKEN",default='none')
 def cli(command,
         filetype,
         repo,
