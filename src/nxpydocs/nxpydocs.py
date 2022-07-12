@@ -43,6 +43,7 @@ class NxPyDocs():
                             # 'show ip route vrf all',
                             # 'show mac address-table',
                             # 'show port-channel summary',
+                            'show system resources',
                             'show version',
                             #'show vlan'
                             ]

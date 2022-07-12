@@ -392,6 +392,51 @@
 </tbody>
 </table>
 {%- else %}
+{%- if command == "show system resources" %}
+<h1>Show System Resources</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>CPU State Idle</th>
+    <th>CPU State Kernel</th>
+    <th>CPU State User</th>
+    <th>Current Memory Status</th>
+    <th>Load Average 15 Minutes</th>
+    <th>Load Average 1 Minute</th>
+    <th>Load Average 5 Minutes</th>
+    <th>Memory Buffers</th>
+    <th>Memory Cached</th>
+    <th>Memory Usage Free</th>
+    <th>Memory Usage Total</th>
+    <th>Memory Usage Used</th>
+    <th>Processes Running</th>
+    <th>Processes Total</th>
+    <th>VM Free</th>
+    <th>VM Total</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>  
+    <td>{{ data_to_template.cpu_state_idle }}</td>
+    <td>{{ data_to_template.cpu_state_kernel }}</td>
+    <td>{{ data_to_template.cpu_state_user }}</td>
+    <td>{{ data_to_template.current_memory_status }}</td>
+    <td>{{ data_to_template.load_avg_15min }}</td>
+    <td>{{ data_to_template.load_avg_1min }}</td>
+    <td>{{ data_to_template.load_avg_5min }}</td>
+    <td>{{ data_to_template.mem_buffers }}</td>
+    <td>{{ data_to_template.mem_cached }}</td>
+    <td>{{ data_to_template.memory_usage_free }}</td>
+    <td>{{ data_to_template.memory_usage_total }}</td>
+    <td>{{ data_to_template.memory_usage_used }}</td>
+    <td>{{ data_to_template.processes_running }}</td>
+    <td>{{ data_to_template.processes_total }}</td>
+    <td>{{ data_to_template.vm_free }}</td>
+    <td>{{ data_to_template.vm_total }}</td>
+  </tr>
+</tbody>
+</table>
+{%- else %}
 {%- if command == "show version" %}
 <h1>Show Version</h1>
 <table id = "datatable">
@@ -452,5 +497,5 @@
   </tr>
 </tbody>
 </table>
-{%- endif %}{%- endif %}{%- endif %}{%- endif %}
+{%- endif %}{%- endif %}{%- endif %}{%- endif %}{%- endif %}
 {%- include 'datatable_footer.j2' %}
