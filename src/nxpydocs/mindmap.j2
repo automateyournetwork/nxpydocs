@@ -177,6 +177,31 @@
 ### VRF Name Out: {{ item["vrf-name-out"] }}
 {%-     endfor %}
 {%- else %}
+{%- if command == "show system resources" %}
+# Show System Resources
+## CPU State
+### Idle: {{ data_to_template.cpu_state_idle }}
+### Kernel: {{ data_to_template.cpu_state_kernel }}
+### User: {{ data_to_template.cpu_state_user }}
+## Load Averages
+### 15 Minute: {{ data_to_template.load_avg_15min }}
+### 5 Minute: {{ data_to_template.load_avg_5min }}
+### 1 Minute: {{ data_to_template.load_avg_1min }}
+## Memory
+### Status: {{ data_to_template.current_memory_status }}
+### Buffers: {{ data_to_template.mem_buffers }}
+### Cached: {{ data_to_template.mem_cached }}
+### Usage
+#### Free: {{ data_to_template.memory_usage_free }}
+#### Total: {{ data_to_template.memory_usage_total }}
+#### Used: {{ data_to_template.memory_usage_used }}
+## Processes
+### Running: {{ data_to_template.processes_running }}
+### Total: {{ data_to_template.processes_total }}
+## VM
+### Free: {{ data_to_template.vm_free }}
+### Total: {{ data_to_template.vm_total }}
+{%- else %}
 {%- if command == "show version" %}
 # Show Version
 ## BIOS
@@ -208,4 +233,4 @@
 ### Service: {{ data_to_template.rr_service }}
 ### System Version: {{ data_to_template.rr_sys_ver }}
 ## Header: {{ data_to_template.header_str | replace("\n"," ") | replace(","," ") }}
-{%- endif %}{%- endif %}{%- endif %}{%- endif %}
+{%- endif %}{%- endif %}{%- endif %}{%- endif %}{%- endif %}
