@@ -1,3 +1,17 @@
+{%- if command == "dir" %}
+# Directory
+## Files
+{%-     for item in data_to_template.TABLE_dir.ROW_dir %}
+### Name: {{ item.fname }}
+#### Size: {{ item.fsize }}
+#### Timestamp: {{ item.timestring }}
+{%-     endfor %}
+## {{ data_to_template.usage }}
+### Bytes
+#### Free: {{ data_to_template.bytesfree }}
+#### Total: {{ data_to_template.bytestotal }}
+#### Used: {{ data_to_template.bytesused }}
+{%- else %}
 {%- if command == "show interface" %}
 # Show Interface
 {%-     for item in data_to_template.TABLE_interface.ROW_interface %}
@@ -233,4 +247,4 @@
 ### Service: {{ data_to_template.rr_service }}
 ### System Version: {{ data_to_template.rr_sys_ver }}
 ## Header: {{ data_to_template.header_str | replace("\n"," ") | replace(","," ") }}
-{%- endif %}{%- endif %}{%- endif %}{%- endif %}{%- endif %}
+{%- endif %}{%- endif %}{%- endif %}{%- endif %}{%- endif %}{%- endif %}

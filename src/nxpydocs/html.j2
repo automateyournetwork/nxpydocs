@@ -1,4 +1,40 @@
 {%- include 'datatable_header.j2' %}
+{%- if command == "dir" %}
+<h1>Directory</h1>
+<table id = "datatable">
+<thead>
+  <tr>
+    <th>Filename</th>
+    <th>File Size</th>
+    <th>Timestamp</th>
+    <th>Bytes Free</th>
+    <th>Bytes Total</th>
+    <th>Bytes Used</th>
+    <th>Usage</th>
+  </tr>
+</thead>  
+<tbody>
+{%-     for item in data_to_template.TABLE_dir.ROW_dir %}
+  <tr>
+    <td>{{ item.fname }}</td>
+    <td>{{ item.fsize }}</td>
+    <td>{{ item.timestring }}</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+  </tr>
+{%-     endfor %}
+  <tr>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>N/A</td>
+    <td>{{ data_to_template.bytesfree }}</td>
+    <td>{{ data_to_template.bytestotal }}</td>
+    <td>{{ data_to_template.bytesused }}</td>
+    <td>{{ data_to_template.usage }}</td>
+  </tr>
+{%- else %}
 {%- if command == "show interface"%}
 <h1>Show Interface</h1>
 <table id = "datatable">
@@ -497,5 +533,5 @@
   </tr>
 </tbody>
 </table>
-{%- endif %}{%- endif %}{%- endif %}{%- endif %}{%- endif %}
+{%- endif %}{%- endif %}{%- endif %}{%- endif %}{%- endif %}{%- endif %}
 {%- include 'datatable_footer.j2' %}

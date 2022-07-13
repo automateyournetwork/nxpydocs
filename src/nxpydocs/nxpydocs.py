@@ -22,6 +22,7 @@ class NxPyDocs():
         self.username = username
         self.token = token
         self.supported_templates = [
+                            'dir',
                             # 'show access-lists',
                             # 'show bgp process vrf all',
                             # 'show bgp sessions',
