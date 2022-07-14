@@ -10,9 +10,10 @@ Wait until the guestshell becomes active
 
 ### Resize guestshell diskspace
 ```console
-guestshell resize rootfs 2000
-guestshell resize memory 2688
-guesthshell reboot
+switch# conf t
+switch(config)# guestshell resize rootfs 2000
+switch(config)# guestshell resize memory 2688
+switch(config)# guesthshell reboot
 ```
 
 ### Update DNS
